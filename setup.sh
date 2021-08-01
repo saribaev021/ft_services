@@ -6,25 +6,25 @@ minikube start --driver=virtualbox --memory='2000' --disk-size 5000MB;
 eval $(minikube docker-env)
 minikube addons enable metallb;
 minikube addons enable dashboard;
-docker build -t nginx ./nginx;
-docker build -t phpmyadmin:nd ./phpmyadmin;
-docker build -t mysql:nd ./mysql_mariadb;
-docker build -t wordpress ./wordpress;
-docker build -t influxdb:nd ./influxdb;
-docker build -t grafana:nd ./grafana;
-docker build -t telegraf:nd ./telegraf;
-docker build -t ftps:nd ./ftps;
+docker build -t nginx ./srcs/nginx;
+docker build -t phpmyadmin:nd ./srcs/phpmyadmin;
+docker build -t mysql:nd ./srcs/mysql_mariadb;
+docker build -t wordpress ./srcs/wordpress;
+docker build -t influxdb:nd ./srcs/influxdb;
+docker build -t grafana:nd ./srcs/grafana;
+docker build -t telegraf:nd ./srcs/telegraf;
+docker build -t ftps:nd ./srcs/ftps;
 
-kubectl apply -f metallb.yaml
-kubectl apply -f pv.yaml
+kubectl apply -f srcs/yaml/metallb.yaml
+kubectl apply -f srcs/yaml/pv.yaml
 
-kubectl apply -f nginx.yaml
-kubectl apply -f nginx-service.yaml
-kubectl apply -f mysql-db.yaml
-kubectl apply -f phpmyadmin.yaml
-kubectl apply -f wordpress.yaml
-kubectl apply -f influxdb.yaml
-kubectl apply -f telegraf-deploy.yaml
-kubectl apply -f grafana.yaml
-kubectl apply -f ftps.yaml
+kubectl apply -f srcs/yaml/nginx.yaml
+kubectl apply -f srcs/yaml/nginx-service.yaml
+kubectl apply -f srcs/yaml/mysql-db.yaml
+kubectl apply -f srcs/yaml/phpmyadmin.yaml
+kubectl apply -f srcs/yaml/wordpress.yaml
+kubectl apply -f srcs/yaml/influxdb.yaml
+kubectl apply -f srcs/yaml/telegraf-deploy.yaml
+kubectl apply -f srcs/yaml/grafana.yaml
+kubectl apply -f srcs/yaml/ftps.yaml
 minikube dashboard
